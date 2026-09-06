@@ -1,0 +1,325 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Management System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* Navigation */
+        nav {
+            background: #172554;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #dbeafe;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 520px;
+            background: linear-gradient(135deg, #172554, #2563eb);
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 60px 8%;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #bfdbfe;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #dbeafe;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 25px;
+            background: white;
+            color: #1d4ed8;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .btn.secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid #bfdbfe;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Features */
+        .features {
+            padding: 60px 8%;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .features > p {
+            color: #6b7280;
+            margin-bottom: 35px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #172554;
+        }
+
+        .card p {
+            color: #6b7280;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        /* Statistics */
+        .stats {
+            background: white;
+            padding: 45px 8%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            text-align: center;
+            gap: 20px;
+        }
+
+        .stat h2 {
+            font-size: 34px;
+            color: #2563eb;
+        }
+
+        .stat p {
+            color: #6b7280;
+            margin-top: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background: #172554;
+            color: #dbeafe;
+            text-align: center;
+            padding: 25px;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 800px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .cards,
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">🎓 StudentHub</div>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="students.html">Students</a>
+            <a href="reports.html">Reports</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>
+                Manage Students.<br>
+                <span>Manage Success.</span>
+            </h1>
+
+            <p>
+                A simple and efficient Student Management System
+                designed to manage student information, monitor
+                academic performance and generate reports.
+            </p>
+
+            <a href="dashboard.html" class="btn">View Dashboard</a>
+            <a href="login.html" class="btn secondary">Student Login</a>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <h2>Everything You Need</h2>
+
+        <p>
+            Powerful modules for efficient student management
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">🔐</div>
+                <h3>Secure Login</h3>
+                <p>
+                    Secure and simple login interface for
+                    students and administrators.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📊</div>
+                <h3>Dashboard</h3>
+                <p>
+                    View student statistics, attendance and
+                    recent academic activities.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">👨‍🎓</div>
+                <h3>Student Details</h3>
+                <p>
+                    Maintain student information including
+                    courses, marks and academic details.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📄</div>
+                <h3>Reports</h3>
+                <p>
+                    Generate and view academic performance
+                    reports for students.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="stats">
+
+        <div class="stat">
+            <h2>120+</h2>
+            <p>Students</p>
+        </div>
+
+        <div class="stat">
+            <h2>8</h2>
+            <p>Active Courses</p>
+        </div>
+
+        <div class="stat">
+            <h2>87%</h2>
+            <p>Average Attendance</p>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            Student Management System © 2026
+        </p>
+
+        <p>
+            Developed by Team of Five Developers using Git
+        </p>
+    </footer>
+
+</body>
+</html>
+```
