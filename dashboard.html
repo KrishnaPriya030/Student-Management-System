@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - Student Management System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: #172554;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #dbeafe;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover, nav a.active {
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Dashboard Container */
+        .container {
+            padding: 40px 8%;
+            flex: 1;
+        }
+
+        .header-title {
+            margin-bottom: 30px;
+        }
+
+        .header-title h1 {
+            font-size: 32px;
+            color: #172554;
+        }
+
+        .header-title p {
+            color: #6b7280;
+            margin-top: 5px;
+        }
+
+        /* Metrics Cards Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .metric-icon {
+            font-size: 32px;
+            background: #eff6ff;
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .metric-info h3 {
+            font-size: 26px;
+            color: #172554;
+        }
+
+        .metric-info p {
+            color: #6b7280;
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        /* Main Dashboard Sections Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .panel {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .panel-header h2 {
+            font-size: 20px;
+            color: #172554;
+        }
+
+        /* Table Styling */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #475569;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .badge.active {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .badge.pending {
+            background: #fef9c3;
+            color: #a16207;
+        }
+
+        /* Quick Action Buttons */
+        .quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            color: #172554;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        /* Activity Stream */
+        .activity-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .activity-item {
+            font-size: 14px;
+            color: #4b5563;
+            border-left: 3px solid #2563eb;
+            padding-left: 12px;
+        }
+
+        .activity-item span {
+            display: block;
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 3px;
+        }
+
+        /* Footer */
+        footer {
+            background: #172554;
+            color: #dbeafe;
+            text-align: center;
+            padding: 25px;
+            font-size: 14px;
+            margin-top: auto;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">🎓 StudentHub</div>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="students.html">Students</a>
+            <a href="reports.html">Reports</a>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header-title">
+            <h1>Dashboard Overview</h1>
+            <p>Welcome back, Administrator. Here is what is happening today.</p>
+        </div>
+
+        <!-- Key Stat Cards -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-icon">👨‍🎓</div>
+                <div class="metric-info">
+                    <h3>120+</h3>
+                    <p>Total Students</p>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon">📚</div>
+                <div class="metric-info">
+                    <h3>8</h3>
+                    <p>Active Courses</p>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon">📈</div>
+                <div class="metric-info">
+                    <h3>87%</h3>
+                    <p>Avg. Attendance</p>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon">📄</div>
+                <div class="metric-info">
+                    <h3>5</h3>
+                    <p>Pending Reports</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Main Section -->
+        <div class="dashboard-grid">
+
+            <!-- Left Column: Recent Students Table -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>Recent Enrolments</h2>
+                    <a href="students.html" style="color: #2563eb; text-decoration: none; font-size: 14px; font-weight: bold;">View All</a>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Course</th>
+                                <th>Attendance</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#ST-1021</td>
+                                <td>Alice Johnson</td>
+                                <td>Computer Science</td>
+                                <td>94%</td>
+                                <td><span class="badge active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>#ST-1022</td>
+                                <td>Bob Smith</td>
+                                <td>Information Tech</td>
+                                <td>82%</td>
+                                <td><span class="badge active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>#ST-1023</td>
+                                <td>Charlie Davis</td>
+                                <td>Data Science</td>
+                                <td>76%</td>
+                                <td><span class="badge pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>#ST-1024</td>
+                                <td>Diana Prince</td>
+                                <td>Software Eng.</td>
+                                <td>91%</td>
+                                <td><span class="badge active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>#ST-1025</td>
+                                <td>Ethan Hunt</td>
+                                <td>Cyber Security</td>
+                                <td>88%</td>
+                                <td><span class="badge active">Active</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Right Column: Quick Actions & Recent Activity -->
+            <div>
+
+                <!-- Quick Actions Panel -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Quick Actions</h2>
+                    </div>
+                    <div class="quick-actions">
+                        <a href="students.html" class="action-btn">
+                            <span>➕</span> Add New Student
+                        </a>
+                        <a href="reports.html" class="action-btn">
+                            <span>📊</span> Generate Report
+                        </a>
+                        <a href="students.html" class="action-btn">
+                            <span>🔍</span> Search Student
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Recent Activity Panel -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Recent Activity</h2>
+                    </div>
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            New student <strong>Alice Johnson</strong> registered.
+                            <span>10 minutes ago</span>
+                        </li>
+                        <li class="activity-item">
+                            Semester 1 Performance Report generated.
+                            <span>2 hours ago</span>
+                        </li>
+                        <li class="activity-item">
+                            Attendance updated for <strong>Computer Science</strong>.
+                            <span>Yesterday</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Student Management System © 2026</p>
+        <p>Developed by Team of Five Developers using Git</p>
+    </footer>
+
+</body>
+</html>
